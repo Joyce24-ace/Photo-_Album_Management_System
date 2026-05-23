@@ -33,10 +33,11 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'cloudinary_storage', 
-    'django.contrib.staticfiles', # staticfiles stays here
+    'django.contrib.staticfiles',  # 1. Move staticfiles ABOVE cloudinary_storage
+    'cloudinary_storage',
     'cloudinary',
     'albums',
+
 ]
 
 print(f"DEBUG: Cloud Name is {os.getenv('CLOUDINARY_CLOUD_NAME')}")
@@ -128,3 +129,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Redirects for Login/Logout
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+
+# Static files configuration for WhiteNoise
+STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# Add this line right below it to prevent strict compilation crashes
+WHITENOISE_MANIFEST_STRICT = False

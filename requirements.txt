@@ -2,3 +2,5 @@ Django>=4.2,<5.1
 cloudinary>=1.36.0
 dj-database-url>=2.1.0
 gunicorn>=21.2.0
+Pillow>=10.0.0
+whitenoise>=6.0.0
