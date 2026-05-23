@@ -1,85 +1,159 @@
 {% extends 'albums/base.html' %}
 
 {% block content %}
-<div class="max-w-xl mx-auto">
-    <a href="{% url 'album-list' %}" class="inline-flex items-center space-x-2 text-sm text-[#7c695a] hover:text-[#36251b] font-medium transition mb-6 group">
-        <svg class="w-4 h-4 transform group-hover:-translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
-        <span>Back to Archive</span>
-    </a>
+<div class="w-full relative z-10">
+    
+    <div class="mb-8">
+        <a href="{% url 'album-list' %}" class="inline-flex items-center space-x-2 text-xs text-slate-500 hover:text-indigo-600 font-bold uppercase tracking-wider transition group">
+            <svg class="w-4 h-4 transform group-hover:-translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+            </svg>
+            <span>Return to Repository Archive</span>
+        </a>
+    </div>
 
-    <div class="bg-[#fdfbf7] border border-[#e6dfd3] rounded-2xl shadow-xl overflow-hidden">
-        <div class="bg-[#36251b] px-8 py-6 text-[#fdfbf7]">
-            <h2 class="text-2xl font-bold tracking-tight">
-                {% if object %}Modify Studio Resources{% else %}Configure Studio Node{% endif %}
-            </h2>
-            <p class="text-[#cfc4b2] text-xs font-light mt-1">Specify parameters to securely synchronize configuration states with Cloudinary systems.</p>
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+        
+        <div class="space-y-4">
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 text-white shadow-sm">
+                <div class="flex items-center justify-between mb-4">
+                    <span class="text-[10px] font-mono tracking-widest text-indigo-400 font-bold uppercase">System Topology</span>
+                    <span class="flex h-2 w-2 relative">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                    </span>
+                </div>
+                
+                <h3 class="text-base font-bold text-slate-100 tracking-tight mb-2">Cloud Storage Sync</h3>
+                <p class="text-slate-400 text-xs font-medium leading-relaxed mb-4">
+                    Any variables committed here overwrite local schemas and automatically synchronize parameters with your downstream Cloudinary environment CDN.
+                </p>
+
+                <div class="space-y-2 border-t border-slate-800 pt-4 font-mono text-[10px] text-slate-400">
+                    <div class="flex items-center justify-between">
+                        <span>DATA_INTEGRITY_CHECK:</span>
+                        <span class="text-emerald-400 font-bold">READY</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span>MEDIA_REDUNDANCY:</span>
+                        <span class="text-indigo-400 font-bold">ACTIVE</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span>TARGET_CLUSTER:</span>
+                        <span>AWS_US_EAST</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white border border-slate-200/80 p-5 rounded-2xl text-[11px] font-medium text-slate-500 leading-relaxed shadow-xs">
+                <strong class="text-slate-800 block mb-1">Notice on File Constraints:</strong>
+                Ensure that target images adhere to your project’s environment constraints. High-resolution formats will automatically trigger compression hooks during initialization.
+            </div>
         </div>
 
-        <form method="post" enctype="multipart/form-data" class="p-8 space-y-6">
-            {% csrf_token %}
-
-            {% if form.errors %}
-                <div class="bg-[#9c523c]/10 border border-[#9c523c]/30 text-[#9c523c] px-4 py-3 rounded-xl text-xs font-medium">
-                    Structural execution error patterns verified within submitted fields.
+        <div class="lg:col-span-2 bg-white border border-slate-200/80 rounded-2xl shadow-xs overflow-hidden">
+            
+            <div class="border-b border-slate-100 px-8 py-5 flex items-center justify-between bg-slate-50/50">
+                <div>
+                    <h2 class="text-sm font-bold tracking-tight text-slate-900">
+                        {% if object %}Modify Local Record Node{% else %}Initialize New Registry Entry{% endif %}
+                    </h2>
+                    <p class="text-slate-400 text-[11px] font-medium mt-0.5">Fill out your parameters to build a secure media node.</p>
                 </div>
-            {% endif %}
-
-            <div class="space-y-5 form-custom-styles">
-                {{ form.as_p }}
+                <span class="text-[10px] font-mono text-slate-400 bg-slate-100 border border-slate-200 px-2 py-0.5 rounded">
+                    {% if object %}EDIT_MODE{% else %}CREATE_MODE{% endif %}
+                </span>
             </div>
 
-            <div class="pt-4 border-t border-[#e6dfd3] flex items-center justify-end space-x-4">
-                <a href="{% url 'album-list' %}" class="bg-[#f3ede0] hover:bg-[#e6dfd3] text-[#5c4636] text-sm font-semibold px-5 py-2.5 rounded-xl transition">
-                    Discard
-                </a>
-                <button type="submit" class="bg-[#b07d62] hover:bg-[#9c6a50] text-white text-sm font-semibold px-6 py-2.5 rounded-xl shadow-md shadow-[#b07d62]/10 transition-all duration-150 hover:-translate-y-0.5">
-                    Commit Changes
-                </button>
-            </div>
-        </form>
+            <form method="post" enctype="multipart/form-data" class="p-8 space-y-6">
+                {% csrf_token %}
+
+                {% if form.errors %}
+                    <div class="border-l-4 border-rose-500 bg-rose-50/60 px-4 py-3 text-xs text-rose-900 rounded-r-xl flex flex-col gap-0.5 shadow-sm animate-shake">
+                        <span class="font-bold text-rose-700 uppercase tracking-wider text-[10px]">Compilation Error:</span>
+                        <span class="text-rose-600/90">Validation failed. Please audit input string requirements before resubmitting.</span>
+                    </div>
+                {% endif %}
+
+                <div class="space-y-5 modern-split-fields">
+                    {{ form.as_p }}
+                </div>
+
+                <div class="pt-5 border-t border-slate-100 flex items-center justify-end space-x-3 text-xs">
+                    <a href="{% url 'album-list' %}" class="bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-600 font-bold px-5 py-2.5 rounded-xl transition-all duration-150">
+                        Cancel Operation
+                    </a>
+                    <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-6 py-2.5 rounded-xl shadow-md shadow-indigo-600/10 transition-all duration-150 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                        Execute Commit Process →
+                    </button>
+                </div>
+            </form>
+        </div>
+
     </div>
 </div>
 
 <style>
-    /* Styling adjustments to match the organic skin/linen layout context */
-    .form-custom-styles p {
+    /* Premium Form Controls Engine Styling Mapping */
+    .modern-split-fields p {
         display: flex;
         flex-direction: column;
         gap: 0.375rem;
         margin-bottom: 1.25rem;
     }
-    .form-custom-styles label {
-        font-size: 0.75rem;
+    .modern-split-fields label {
+        font-size: 11px;
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.05em;
-        color: #6e5a4b;
+        color: #475569; /* slate-600 */
     }
-    .form-custom-styles input[type="text"], 
-    .form-custom-styles textarea {
+    .modern-split-fields input[type="text"],
+    .modern-split-fields input[type="number"],
+    .modern-split-fields textarea,
+    .modern-split-fields select {
         width: 100%;
-        padding: 0.75rem 1rem;
+        padding: 0.625rem 0.875rem;
         font-size: 0.875rem;
-        background-color: #fcfbf7;
-        border: 1px solid #e6dfd3;
-        border-radius: 0.75rem;
-        color: #36251b;
-        transition: all 0.2s;
-    }
-    .form-custom-styles input[type="text"]:focus, 
-    .form-custom-styles textarea:focus {
         background-color: #ffffff;
-        border-color: #b07d62;
+        border: 1px solid #cbd5e1; /* slate-300 */
+        border-radius: 0.625rem;
+        color: #0f172a; /* slate-900 */
+        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.01);
+        transition: all 0.15s ease;
+    }
+    .modern-split-fields input[type="text"]:focus,
+    .modern-split-fields input[type="number"]:focus,
+    .modern-split-fields textarea:focus,
+    .modern-split-fields select:focus {
+        border-color: #6366f1; /* indigo-500 */
         outline: none;
-        box-shadow: 0 0 0 4px rgba(176, 125, 98, 0.15);
+        box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.12);
     }
-    .form-custom-styles input[type="file"] {
-        font-size: 0.875rem;
-        color: #7c695a;
-        background: #f7f4eb;
+    /* Elegant File Selection Field Controls */
+    .modern-split-fields input[type="file"] {
+        font-size: 0.825rem;
+        color: #64748b;
+        background: #f8fafc;
         padding: 0.5rem;
-        border-radius: 0.75rem;
-        border: 1px dashed #cfc4b2;
+        border-radius: 0.625rem;
+        border: 1px dashed #cbd5e1;
+        cursor: pointer;
     }
+    .modern-split-fields input[type="file"]:hover {
+        background: #f1f5f9;
+        border-color: #94a3b8;
+    }
+    .modern-split-fields input[type="checkbox"] {
+        width: auto;
+        display: inline-block;
+        margin-right: 0.5rem;
+    }
+    @keyframes shake {
+        0%, 100% { transform: translateX(0); }
+        25% { transform: translateX(-4px); }
+        75% { transform: translateX(4px); }
+    }
+    .animate-shake { animation: shake 0.3s ease-in-out; }
 </style>
 {% endblock %}
