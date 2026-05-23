@@ -2,9 +2,9 @@ Photo Album Management System
 A web-based application designed to seamlessly manage, organize, and view photo albums. Built with a focus on performance and user experience, the application is fully deployed and ready for use.
 
 🚀 Live Links
-Live Application: Deploy on Render
+Live Application: https://photo-album-management-system-k13u.onrender.com
 
-Source Code Repository: 
+Source Code Repository: https://github.com/Joyce24-ace/Photo-_Album_Management_System.git
 
 ✨ Key Features
 Studio Node Initialization: Create and isolate custom studio repositories for distinct asset collections.
