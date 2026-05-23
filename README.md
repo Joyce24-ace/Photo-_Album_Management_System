@@ -22,6 +22,7 @@ Frontend: HTML5, Tailwind, JavaScript
 
 Backend: Python 
 
-Framework/Libraries: Django
+Framework/Libraries: Django, Cloudinary
+
 
 Deployment: Render
